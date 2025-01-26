@@ -1,3 +1,4 @@
+# Manage the board
 class Board
   def initialize
     @cells = Array.new(3, Array.new(3, ' '))
