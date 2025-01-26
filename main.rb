@@ -7,7 +7,6 @@ board.display_board
 
 player1 = Player.new
 
-puts "Player 1, please input the cell you've chosen:"
-player1.choice = gets.chomp
+player1.set_choice
 
-puts "Player 1 inputted: #{player1.choice}"
+player1.choice
