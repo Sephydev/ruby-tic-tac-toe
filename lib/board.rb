@@ -9,7 +9,7 @@ class Board
     puts '---------------'
 
     @cells.each_with_index do |row, idx|
-      row_str = "#{idx} |"
+      row_str = "#{idx + 1} |"
 
       row.each do |cell|
         row_str += " #{cell} |"
