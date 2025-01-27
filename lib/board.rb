@@ -21,8 +21,10 @@ class Board
   end
 
   def modify_board(choice, player)
-    if player == 1
-      @cells[choice[0].to_i - 1][choice[1].to_i - 1] = 'O'
-    end
+    @cells[choice[1].to_i - 1][choice[0].to_i - 1] = if player == 1
+                                                       'O'
+                                                     else
+                                                       'X'
+                                                     end
   end
 end

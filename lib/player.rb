@@ -1,14 +1,14 @@
 # Manage the player
 class Player
-  attr_reader :choice
+  attr_reader :choice, :player_id
 
-  def initialize
-    @choice
+  def initialize(player_id)
+    @player_id = player_id
   end
 
   def set_choice
     loop do
-      puts "Player 1, please input the cell you've chosen:"
+      puts "Player #{@player_id}, please input the cell you've chosen:"
       choice_to_check = gets.chomp.downcase
 
       choice_to_check = translate_choice(choice_to_check)
