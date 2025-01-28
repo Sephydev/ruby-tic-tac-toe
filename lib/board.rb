@@ -1,5 +1,7 @@
 # Manage the board
 class Board
+  attr_reader :cells
+
   def initialize
     @cells = Array.new(3) { Array.new(3, ' ') }
     @win = false
@@ -26,5 +28,40 @@ class Board
                                                      else
                                                        'X'
                                                      end
+  end
+
+  def check_win(board)
+    return true if check_row(board)
+
+    return true if check_column(board)
+
+    check_diagonal(board)
+  end
+
+  private
+
+  def check_row(board)
+    board.any? { |row| row.all? { |cell| cell.include?('O') || cell.include?('X') } }
+  end
+
+  def check_column(board)
+    temp = [[], [], []]
+
+    board.each_with_index do |row, idx|
+      temp[idx] << row[idx]
+    end
+
+    temp.any? { |row| row.all? { |cell| cell.include?('O') || cell.include?('X') } }
+  end
+
+  def check_diagonal(board)
+    temp = [[], [], []]
+
+    board.each_with_index do |row, idx|
+      temp[0] << board[idx][idx]
+      temp[1] << board[idx][row.length - idx]
+    end
+
+    temp.any? { |row| row.all? { |cell| cell.include?('O') || cell.include?('X') } }
   end
 end
