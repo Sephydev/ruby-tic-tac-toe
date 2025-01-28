@@ -32,7 +32,6 @@ class Board
 
   def check_win(board)
     return true if check_row(board)
-
     return true if check_column(board)
 
     check_diagonal(board)
@@ -41,27 +40,39 @@ class Board
   private
 
   def check_row(board)
-    board.any? { |row| row.all? { |cell| cell.include?('O') || cell.include?('X') } }
+    return true if board.any? { |row| row.all? { |cell| cell.include?('O') } }
+
+    return true if board.any? { |row| row.all? { |cell| cell.include?('X') } }
+
+    false
   end
 
   def check_column(board)
     temp = [[], [], []]
 
-    board.each_with_index do |row, idx|
-      temp[idx] << row[idx]
+    board.each do |row|
+      temp[0] << row[0]
+      temp[1] << row[1]
+      temp[2] << row[2]
     end
 
-    temp.any? { |row| row.all? { |cell| cell.include?('O') || cell.include?('X') } }
+    return true if temp.any? { |row| row.all? { |cell| cell.include?('O') } }
+    return true if temp.any? { |row| row.all? { |cell| cell.include?('X') } }
+
+    false
   end
 
   def check_diagonal(board)
-    temp = [[], [], []]
+    temp = [[], []]
 
     board.each_with_index do |row, idx|
       temp[0] << board[idx][idx]
-      temp[1] << board[idx][row.length - idx]
+      temp[1] << board[idx][row.length - idx - 1]
     end
 
-    temp.any? { |row| row.all? { |cell| cell.include?('O') || cell.include?('X') } }
+    return true if temp.any? { |row| row.all? { |cell| cell.include?('O') } }
+    return true if temp.any? { |row| row.all? { |cell| cell.include?('X') } }
+
+    false
   end
 end
